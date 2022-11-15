@@ -1,4 +1,4 @@
-select sum(assignment_submissions.duration) AS total_cohort_duration
+SELECT sum(assignment_submissions.duration) AS total_cohort_duration
 FROM assignment_submissions
 JOIN students ON student_id = students.id
 WHERE students.cohort_id = 1;
