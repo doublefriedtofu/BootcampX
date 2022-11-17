@@ -7,13 +7,17 @@ const pool = new Pool({
   database: 'bootcampx'
 });
 
+const cohortName = process.argv[2];
+
+const values = [`%${cohortName}%`];
+
 pool.query(`
 SELECT teachers.name AS teacher, cohorts.name AS cohort
 FROM teachers
 JOIN assistance_requests ON teacher_id = teachers.id
 JOIN students ON student_id = students.id
 JOIN cohorts ON cohort_id = cohorts.id
-WHERE cohorts.name LIKE '%${process.argv[2]}%'
+WHERE cohorts.name LIKE '%${values[0]}%'
 GROUP BY teacher, cohort
 ORDER BY teacher;
 `)
